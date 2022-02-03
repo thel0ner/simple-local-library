@@ -1,0 +1,19 @@
+import React from "react";
+import { Image } from "react-bootstrap";
+import { defaultBase64 } from "./notfound.const";
+import "./BookImageThumbnail.css";
+const BookImageThumbnail = ({ imageBlob, altText }) => {
+  const url = imageBlob ? imageBlob : defaultBase64;
+  return (
+    <>
+      <Image
+        src={url}
+        alt={altText ? altText : ""}
+        thumbnail={true}
+        className="thumbnail"
+      />
+    </>
+  );
+};
+
+export default BookImageThumbnail;
