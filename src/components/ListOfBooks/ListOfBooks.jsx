@@ -16,10 +16,8 @@ const ListOfBooks = () => {
    * End of controlling new book modal
    */
   const books = useSelector((state) => state.bookLibrary.books);
-  console.log(books);
   return (
     <>
-      {JSON.stringify(books)}
       <div className="row border rounded mt-3 p-2">
         <div className="col-12">
           <AddNewBookButton callback={openModal} />
