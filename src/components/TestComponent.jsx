@@ -2,9 +2,10 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import BookRow from "./BookRow/BookRow";
 import AddNewBookButton from "./AddNewBookButton/AddNewBookButton";
+import SimpleSpinner from './SimpleSpinner/SimpleSpinner';
 import {
-  decrement,
-  increment,
+  addBook,
+  removeBook,
 } from "../features/book-library/booklibrarySlice";
 const TestComponent = () => {
   const books = useSelector((state) => state.bookLibrary.books);
@@ -17,6 +18,7 @@ const TestComponent = () => {
     <>
       <AddNewBookButton callback={addNewItem} />
       <BookRow bookTitle="test" bookDateAdded={new Date(2018,10,15)} />
+      <SimpleSpinner /> 
       {/* 
       <RemoveBookButton callback={addNewItem} />
       <EditBookComponent callback={addNewItem} />
