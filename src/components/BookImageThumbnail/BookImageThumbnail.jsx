@@ -10,7 +10,7 @@ const BookImageThumbnail = ({ imageBlob, altText }) => {
         src={url}
         alt={altText ? altText : ""}
         thumbnail={true}
-        className="thumbnail"
+        className="rounded border-0 thumbnail"
       />
     </>
   );

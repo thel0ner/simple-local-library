@@ -6,12 +6,9 @@ const AddNewBookButton = ({callback}) => {
   return (
     <>
       <div className="row">
-        <div className="col-3">
-          <Button variant="outline-info" onClick={() => callback()}>
-            <BsPlusCircle/>
-            <span className="ml-2 d-inline-block">
-                Add new book
-            </span>
+        <div className="col-12">
+          <Button variant="info" size="lg" onClick={() => callback()}>
+            <BsPlusCircle className="pr-2"/>
           </Button>
         </div>
       </div>

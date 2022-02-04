@@ -16,7 +16,7 @@ const TestComponent = () => {
   return (
     <>
       <AddNewBookButton callback={addNewItem} />
-      <BookRow bookTitle="test" bookDateAdded={new Date()} />
+      <BookRow bookTitle="test" bookDateAdded={new Date(2018,10,15)} />
       {/* 
       <RemoveBookButton callback={addNewItem} />
       <EditBookComponent callback={addNewItem} />
