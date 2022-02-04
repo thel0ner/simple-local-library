@@ -16,8 +16,10 @@ const ListOfBooks = () => {
    * End of controlling new book modal
    */
   const books = useSelector((state) => state.bookLibrary.books);
+  console.log(books);
   return (
     <>
+      {JSON.stringify(books)}
       <div className="row border rounded mt-3 p-2">
         <div className="col-12">
           <AddNewBookButton callback={openModal} />
@@ -25,8 +27,12 @@ const ListOfBooks = () => {
             <AddNewBookModal modalControllerCallback={closeModal} />
           </NewBookModalContext.Provider>
           {books.length === 0 && <NoBook />}
-          {books.map((book) => (
-            <BookRow />
+          {books.map((book, index) => (
+            <BookRow
+              key={index}
+              issuedDate={book.issuedDate}
+              bookTitle={book.bookTitle}
+            />
           ))}
         </div>
       </div>

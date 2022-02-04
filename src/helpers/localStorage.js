@@ -10,7 +10,7 @@ export const StorageConfig = {
 export const readFromStorage = (storageId) => {
     const temp = localStorage.getItem(storageId);
     if (temp) {
-        return JSON.stringify(temp);
+        return JSON.parse(temp);
     }
     return [];
 }
