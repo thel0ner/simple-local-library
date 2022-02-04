@@ -6,7 +6,6 @@ import { NewBookModalContext } from "../ListOfBooks/NewBookModalContext";
 import { addBook } from "../../features/book-library/booklibrarySlice";
 import { useDispatch } from "react-redux";
 const AddNewBookModal = ({ modalControllerCallback }) => {
-  console.log(addBook);
   /*
    * Form elements
    */
