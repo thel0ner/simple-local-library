@@ -7,7 +7,8 @@ const BookImageThumbnail = ({ imageBlob, altText }) => {
   return (
     <>
       <Image
-        src={url}
+        // src={url}
+        src={defaultBase64} // for debugonly
         alt={altText ? altText : ""}
         thumbnail={true}
         className="rounded border-0 thumbnail"

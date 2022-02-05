@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "react-bootstrap/";
 import { BsFillPencilFill } from "react-icons/bs";
-const EditBookButton = ({ callback }) => {
+const EditBookButton = ({ callback,rawData }) => {
   return (
     <>
-      <Button variant="primary" onClick={() => callback()}>
+      <Button variant="primary" onClick={() => callback(rawData)}>
         <BsFillPencilFill />
       </Button>
     </>

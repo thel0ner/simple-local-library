@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import { NewBookModalContext } from "../ListOfBooks/NewBookModalContext";
+import {
+  ModalRawDataContext,
+  NewBookModalContext,
+} from "../ListOfBooks/NewBookModalContext";
 import { addBook } from "../../features/book-library/booklibrarySlice";
 import { useDispatch } from "react-redux";
 const AddNewBookModal = ({ modalControllerCallback }) => {
@@ -14,6 +17,21 @@ const AddNewBookModal = ({ modalControllerCallback }) => {
   const [issuedDate, setIssuedDate] = useState(null);
   const [submited, setSubmitted] = useState(false);
   const dispatch = useDispatch();
+  const show = useContext(NewBookModalContext);
+  const rawData = useContext(ModalRawDataContext);
+  useEffect(() => {
+    if (rawData) {
+      setTitle(rawData.title);
+      // setImage(rawData.image); should be fixed
+      setIssuedDate(rawData.issuedDate);
+    }
+    return () => {
+      setTimeout(() => {
+        setTitle(null);
+        setIssuedDate(null);
+      }, 0);
+    };
+  }, [rawData, show]);
   /*
    * From and modal control
    */
@@ -21,7 +39,11 @@ const AddNewBookModal = ({ modalControllerCallback }) => {
     setSubmitted(false);
     modalControllerCallback();
   };
-  const submit = () => {
+
+  const submit = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log(event);
     setSubmitted(true);
     if (!title || !image || !issuedDate) return;
     dispatch(
@@ -33,13 +55,11 @@ const AddNewBookModal = ({ modalControllerCallback }) => {
     );
     modalControllerCallback();
   };
-
-  const show = useContext(NewBookModalContext);
   return (
     <>
       <Modal show={show} onHide={close}>
         <Modal.Header closeButton>
-          <Modal.Title>New Book</Modal.Title>
+          <Modal.Title>{rawData ? "Edit book" : "New Book"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={submit}>
@@ -48,6 +68,7 @@ const AddNewBookModal = ({ modalControllerCallback }) => {
               <Form.Control
                 required
                 type="text"
+                defaultValue={title}
                 onChange={(element) => setTitle(element.target.value)}
                 className={submited && !title && "border-danger"}
                 placeholder="title of  the book"
@@ -61,6 +82,7 @@ const AddNewBookModal = ({ modalControllerCallback }) => {
               <Form.Control
                 required
                 type="date"
+                defaultValue={issuedDate}
                 onChange={(element) => setIssuedDate(element.target.value)}
                 className={submited && !issuedDate && "border-danger"}
                 placeholder="issue date of the book"
@@ -76,6 +98,7 @@ const AddNewBookModal = ({ modalControllerCallback }) => {
               <Form.Control
                 required
                 type="file"
+                defaultValue={image}
                 onChange={(element) => setImage(element.target.value)}
                 className={submited && !image && "border-danger"}
                 placeholder="issue date of the book"
@@ -92,7 +115,7 @@ const AddNewBookModal = ({ modalControllerCallback }) => {
           <Button variant="secondary" onClick={close}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => submit()}>
+          <Button variant="primary" onClick={(event) => submit(event)}>
             Save Changes
           </Button>
         </Modal.Footer>

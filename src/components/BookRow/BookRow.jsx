@@ -6,9 +6,13 @@ import {
 import RemoveBookButton from "../RemoveBookButton/RemoveBookButton";
 import EditBookComponent from "../EditBookButton/EditBookButton";
 import BookImageThumbnail from "../BookImageThumbnail/BookImageThumbnail";
-const BookRow = (props) => {
-  const { bookImage, bookTitle, issuedDate, removeCallBack, editCallBack } =
-    props;
+const BookRow = ({
+  bookImage,
+  bookTitle,
+  issuedDate,
+  removeCallBack,
+  editCallBack,
+}) => {
   return (
     <>
       <div className="row broder shadow-sm">
@@ -19,13 +23,18 @@ const BookRow = (props) => {
           <strong>{bookTitle}</strong>
         </div>
         <div className="col-md-3 col-12 d-flex justify-content-start align-items-center">
-          <strong>
-            {dateConverter(issuedDate, popularDateFormats.Short)}
-          </strong>
+          <strong>{dateConverter(issuedDate, popularDateFormats.Short)}</strong>
         </div>
         <div className="col-md-3 col-12 d-flex align-items-center justify-content-around">
           <RemoveBookButton callback={removeCallBack} />
-          <EditBookComponent callback={editCallBack} />
+          <EditBookComponent
+            callback={editCallBack}
+            rawData={{
+              title: bookTitle,
+              issuedDate,
+              image: bookImage,
+            }}
+          />
         </div>
       </div>
     </>
